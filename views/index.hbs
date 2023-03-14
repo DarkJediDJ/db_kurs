@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список пользователей</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class = "allusers">
+        <img src = "images/logo.jpg" width="300" height="170">
+        <h1>Список пользователей</h1>
+        <form action="/create">
+            <button>Добавить пользователя</button>
+        </form>
+        <p></p>
+        <form action="/check">
+            <button>Авторизация</button>
+        </form>
+        <table>
+            <tr><th>Логин</th><th>Пароль</th></tr>
+            {{#each users}}
+                <tr>
+                    <td>{{this.login}}</td>
+                    <td>{{this.password}}</td>
+                    <td>
+                        <a href="/edit/{{this.id}}">Изменить</a>|
+                        <form action="delete/{{this.id}}" method="POST" style="display:inline;">
+                            <input type="submit" value="Delete" />
+                        </form>
+                    </td>
+                </tr>
+            {{/each}}
+        </table>
+    </div>
+</body>
+<html>

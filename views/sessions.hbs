@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список пользователей</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="allusers">
+        </form>
+        <table>
+                <td>
+                    <form action="movie" method="GET" style="display:inline;">
+                        <input type="submit" value="Фильмы" />
+                    </form>
+                </td>
+                <td>
+                    <form action="hall" method="GET" style="display:inline;">
+                        <input type="submit" value="Залы">
+                    </form>
+                </td>
+                <td>
+                        <form action="create_session" method="GET">
+            <input type="submit" value="Добавить">
+            </td>
+        <tr><th>Начало</th><th>Конец</th><th>ID Фильма</th><th>ID Зала</th><th></th></tr>
+        {{#each session}}
+            <tr>
+                <td>{{this.start_at}}</td>
+                <td>{{this.end_at}}</td>
+                <td>{{this.movie_id}}</td>
+                <td>{{this.halls_id}}</td>
+                <td>
+                    <form action="delete_session/{{this.id}}" method="POST" style="display:inline;">
+                        <input type="submit" value="Удалить" />
+                    </form>
+                </td>
+                <td>
+                    <form action="view_session/{{this.id}}" method="GET" style="display:inline;">
+                        <input type="submit" value="Просмотреть" />
+                    </form>                
+                </td>
+                <td>
+                    <form action="edit_session/{{this.id}}" method="GET" style="display:inline;">
+                        <input type="submit" value="Изменить">
+                    </form>
+                </td>
+            </tr>
+        {{/each}} <tr>
+
+        </tr>         
+        </table>
+    </div>
+</body>
+</html>

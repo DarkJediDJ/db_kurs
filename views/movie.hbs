@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</style>
+<body>
+    <div class="allusers">
+        <table style="margin-left:auto;margin-right:auto;">
+                            <td>
+                        <form action="create_movie" method="GET">
+            <input type="submit" value="Добавить">
+            </td>
+            <tr><th>Название</th><th>Жанр</th><th>Дата выхода</th></tr>
+            {{#each movie}}
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.genre}}</td>
+                <td>{{this.release_date}}</td>
+            </tr>
+            {{/each}} 
+        </table>
+             <a href="/sessions">К сессиям</a>
+    </div>
+</body>
+</html>

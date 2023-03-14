@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редактирование пользователя</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class = "allusers">
+        <h1>Редактирование пользователя</h1>
+        <form action="/edit" method="POST">
+        <input type="hidden" name="id" value="{{user.id}}" />
+        <label>Логин</label><br>
+        <input name="login" value="{{user.login}}"  class="field" /><br><br>
+        <label>Пароль</label><br>
+        <input name="password" value="{{user.user_password}}"  class="field" /><br><br>
+        <input type="submit" value="Отправить" />
+        </form>
+        <a href="/">К списку пользователей</a>
+    </div>
+</body>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="allusers">
+        <table style="margin-left:auto;margin-right:auto;">
+                                        <td>
+                        <form action="create_hall" method="GET">
+            <input type="submit" value="Добавить">
+            </td>
+            <tr><th>VIP</th><th>Количество мест</th></tr>
+            {{#each hall}}
+            <tr>
+                <td>{{this.vip}}</td>
+                <td>{{this.seats}}</td>
+            </tr>
+            {{/each}} 
+        </table>
+                     <a href="/sessions">К сессиям</a>
+    </div>
+</body>
+</html>

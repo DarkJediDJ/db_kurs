@@ -1,0 +1,4 @@
+DELIMITER $$
+CREATE DEFINER=`user`@`%` PROCEDURE `insert_record`(IN `name` VARCHAR(30), IN `password` VARCHAR(30), IN `fraction` VARCHAR(30))
+INSERT INTO Players (name, fraction, password) VALUES (name, fraction, psswrd)$$
+DELIMITER ;

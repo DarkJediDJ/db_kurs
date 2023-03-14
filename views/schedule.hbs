@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список пользователей</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="allusers">
+                                                 <a href="https://www.youtube.com/watch?v=r5X-hFf6Bwo&ab_channel=Movieclips">К трейлеру</a>    
+        </form>
+        <table>
+
+        <tr><th>Начало</th><th>Конец</th><th>ID Фильма</th><th>ID Зала</th><th></th></tr>
+        {{#each session}}
+            <tr>
+                <td>{{this.start_at}}</td>
+                <td>{{this.end_at}}</td>
+                <td>{{this.movie_id}}</td>
+                <td>{{this.halls_id}}</td>
+            </tr>
+        {{/each}} <tr>
+
+        </tr> 
+                             <a href="/sort">К отсортированным фильмам</a>      
+
+        </table>
+    </div>
+</body>
+</html>
