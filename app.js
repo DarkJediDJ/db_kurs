@@ -224,6 +224,9 @@ app.get("/hall", function(req, res){
   });
   });
 });
+app.get("/spravka", function(req, res){
+  res.render("spravka.hbs");
+});
 app.listen(3000, function(){
   console.log("Сервер ожидает подключения...");
 });
