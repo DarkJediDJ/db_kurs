@@ -1,6 +1,7 @@
+const PDFDocument = require('pdfkit');
+const fs = require('fs');
 const mysql = require("mysql2");
 const express = require("express");
- import PDFDocument from 'pdfkit'
 const app = express();
 const urlencodedParser = express.urlencoded({extended: false});
 app.use(express.static('public'));
@@ -227,3 +228,32 @@ app.get("/hall", function(req, res){
 app.get("/spravka", function(req, res){
   res.render("spravka.hbs");
 });
+app.listen(3000, function(){
+  console.log("Сервер ожидает подключения на порту 3000")
+})
+function buildPDF(dataCallback, endCallback) {
+  const doc = new PDFDocument({ bufferPages: true, font: 'Courier' });
+
+  doc.on('data', dataCallback);
+  doc.on('end', endCallback);
+
+  doc.fontSize(20).text(`A heading`);
+
+  doc
+    .fontSize(12)
+    .text(
+      `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, saepe.`
+    );
+  doc.end();
+}
+app.get("/bilet", function(req, res){
+  const stream = res.writeHead(200, {
+    'Content-Type': 'application/pdf',
+    'Content-Disposition': `attachment;filename=invoice.pdf`,
+  });
+ buildPDF(
+    (chunk) => stream.write(chunk),
+    () => stream.end()
+  );
+
+  });
