@@ -5,7 +5,9 @@ const express = require("express");
 const app = express();
 const urlencodedParser = express.urlencoded({extended: false});
 app.use(express.static('public'));
- 
+
+let seat = 0
+
 const pool = mysql.createPool({
   connectionLimit: 5,
   host: "localhost",
@@ -172,9 +174,22 @@ app.get("/sort", function(req, res){
     });
   });
 });
+app.get("/poisk", function(req, res){
+  res.render("poisk.hbs");
+});
+app.get("/poisk_movie/:name", urlencodedParser, function (req, res) {
+  if(!req.body) return res.sendStatus(400);
+  const name = req.params.name;
+  pool.query("SELECT * FROM Movie WHERE Movie.name = ?", [String(name)], function(err, data) {
+    if(err) return console.log(err);
+    res.render("user_movie.hbs", {
+      movie: data
+  });
+  });
+});
 app.get("/schedule", function(req, res){
   const id = req.params.id;
-  pool.query("SELECT Session.start_at, Session.end_at, Movie.name, Hall.seats, Movie.genre, Movie.release_date FROM `Session` JOIN Movie ON Session.movie_id=Movie.id JOIN Hall ON Session.halls_id=Hall.id ORDER BY start_at", function(err, data) {
+  pool.query("SELECT Session.id, Session.start_at, Session.end_at, Movie.name, Hall.seats, Movie.genre, Movie.release_date FROM `Session` JOIN Movie ON Session.movie_id=Movie.id JOIN Hall ON Session.halls_id=Hall.id ORDER BY start_at", function(err, data) {
     if(err) return console.log(err);
     res.render("schedule.hbs", {
       session: data
@@ -231,29 +246,36 @@ app.get("/spravka", function(req, res){
 app.listen(3000, function(){
   console.log("Сервер ожидает подключения на порту 3000")
 })
-function buildPDF(dataCallback, endCallback) {
-  const doc = new PDFDocument({ bufferPages: true, font: 'Courier' });
-
-  doc.on('data', dataCallback);
-  doc.on('end', endCallback);
-
-  doc.fontSize(20).text(`A heading`);
-
-  doc
-    .fontSize(12)
-    .text(
-      `Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, saepe.`
+app.get("/bilet/:id", function(req, res){
+  const id = req.params.id;
+  pool.query("SELECT Session.start_at, Session.end_at, Movie.name FROM `Session` JOIN Movie ON Session.movie_id=Movie.id WHERE Session.id = ?",[id], function(err, data) {
+    if(err) return console.log(err);
+    const stream = res.writeHead(200, {
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': `attachment;filename=bilet.pdf`,
+    });
+   buildPDF(
+      (chunk) => stream.write(chunk),
+      () => stream.end(),
+      data
     );
-  doc.end();
-}
-app.get("/bilet", function(req, res){
-  const stream = res.writeHead(200, {
-    'Content-Type': 'application/pdf',
-    'Content-Disposition': `attachment;filename=invoice.pdf`,
   });
- buildPDF(
-    (chunk) => stream.write(chunk),
-    () => stream.end()
-  );
 
   });
+
+  function buildPDF(dataCallback, endCallback, ticket) {
+    seat = seat+1
+    const doc = new PDFDocument({ bufferPages: true, font: 'Courier' });
+  
+    doc.on('data', dataCallback);
+    doc.on('end', endCallback);
+    ticket.forEach(x => {
+      doc.fontSize(20).text(`Ticket`);
+      doc.fontSize(12).text(`Seat `+seat);
+      doc.fontSize(12).text(`Movie `+x.name);
+      doc.fontSize(12).text(`Start at `+x.start_at);
+      doc.fontSize(12).text(`End at `+x.end_at);
+    });
+
+    doc.end();
+  }

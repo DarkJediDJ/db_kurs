@@ -6,11 +6,9 @@
 </head>
 </style>
 <body>
+
     <div class="allusers">
         <table style="margin-left:auto;margin-right:auto;">
-                 <form action="/poisk" method="get">
-       <input type="submit" value="Поиск по названию"/>
-     </form>  
             <tr><th>Название</th><th>Жанр</th><th>Дата выхода</th></tr>
             {{#each movie}}
             <tr>
@@ -20,9 +18,10 @@
             </tr>
             {{/each}} 
         </table>
+             </form>
      <form action="/schedule" method="get">
-       <input type="submit" value="К расписанию"/>
-     </form>   
+       <input type="submit" value="К сессиям"/>
+     </form>
     </div>
 </body>
 </html>
