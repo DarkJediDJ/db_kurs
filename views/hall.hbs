@@ -18,8 +18,11 @@
                 <td>{{this.seats}}</td>
             </tr>
             {{/each}} 
+            </form>
         </table>
-                     <a href="/sessions">К сессиям</a>
+     <form action="/sessions" method="get">
+       <input type="submit" value="К сессиям"/>
+     </form>
     </div>
 </body>
 </html>

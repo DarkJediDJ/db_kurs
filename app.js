@@ -1,6 +1,6 @@
 const mysql = require("mysql2");
 const express = require("express");
- 
+ import PDFDocument from 'pdfkit'
 const app = express();
 const urlencodedParser = express.urlencoded({extended: false});
 app.use(express.static('public'));
@@ -173,7 +173,7 @@ app.get("/sort", function(req, res){
 });
 app.get("/schedule", function(req, res){
   const id = req.params.id;
-  pool.query("SELECT * FROM Session ORDER BY start_at", function(err, data) {
+  pool.query("SELECT Session.start_at, Session.end_at, Movie.name, Hall.seats, Movie.genre, Movie.release_date FROM `Session` JOIN Movie ON Session.movie_id=Movie.id JOIN Hall ON Session.halls_id=Hall.id ORDER BY start_at", function(err, data) {
     if(err) return console.log(err);
     res.render("schedule.hbs", {
       session: data
@@ -226,7 +226,4 @@ app.get("/hall", function(req, res){
 });
 app.get("/spravka", function(req, res){
   res.render("spravka.hbs");
-});
-app.listen(3000, function(){
-  console.log("Сервер ожидает подключения...");
 });

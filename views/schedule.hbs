@@ -7,24 +7,35 @@
 </head>
 <body>
     <div class="allusers">
-                                                 <a href="https://www.youtube.com/watch?v=r5X-hFf6Bwo&ab_channel=Movieclips">К трейлеру</a>    
         </form>
         <table>
 
-        <tr><th>Начало</th><th>Конец</th><th>ID Фильма</th><th>ID Зала</th><th></th></tr>
+        <tr><th>Начало</th><th>Конец</th><th>Фильм</th><th>Количество мест</th><th>Жанр</th><th>Дата выхода фильма</th><th></th></tr>
         {{#each session}}
             <tr>
                 <td>{{this.start_at}}</td>
                 <td>{{this.end_at}}</td>
-                <td>{{this.movie_id}}</td>
-                <td>{{this.halls_id}}</td>
+                <td>{{this.name}}</td>
+                <td>{{this.seats}}</td>
+                <td>{{this.genre}}</td>
+                <td>{{this.release_date}}</td>
+                     <form action="/sort" method="get">
+       <input type="submit" value="Купить билет"/>
+     </form>
             </tr>
         {{/each}} <tr>
 
         </tr> 
-                             <a href="/sort">К отсортированным фильмам</a>      
+
+     <form action="/sort" method="get">
+       <input type="submit" value="К отсортированным фильмам"/>
+     </form>
+        
 
         </table>
+     <form action="/check" method="get">
+       <input type="submit" value="Выйти"/>
+     </form>
     </div>
 </body>
 </html>

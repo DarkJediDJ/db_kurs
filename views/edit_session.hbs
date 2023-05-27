@@ -21,6 +21,8 @@
             <input name="hall_id" value="{{session.halls_id}}" /><br><br>
             <input type="submit" value="Отправить" />
         </form>
-        <a href="/sessions">К списку сессий</a>
+     <form action="/sessions" method="get">
+       <input type="submit" value="К списку"/>
+     </form>
     </div>
 </body>

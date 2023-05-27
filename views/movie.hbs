@@ -6,11 +6,13 @@
 </head>
 </style>
 <body>
+
     <div class="allusers">
         <table style="margin-left:auto;margin-right:auto;">
                             <td>
-                        <form action="create_movie" method="GET">
+                                         <form action="create_movie" method="GET">
             <input type="submit" value="Добавить">
+    
             </td>
             <tr><th>Название</th><th>Жанр</th><th>Дата выхода</th></tr>
             {{#each movie}}
@@ -21,7 +23,10 @@
             </tr>
             {{/each}} 
         </table>
-             <a href="/sessions">К сессиям</a>
+             </form>
+     <form action="/sessions" method="get">
+       <input type="submit" value="К сессиям"/>
+     </form>
     </div>
 </body>
 </html>
