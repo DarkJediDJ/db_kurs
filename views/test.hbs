@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список пользователей</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+  <div class="allusers">
+<div class="container">
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Начало</div>
+      <div class="col col-2">Конец</div>
+      <div class="col col-3">Фильм</div>
+      <div class="col col-4">Количество мест</div>
+      <div class="col col-5">Жанр</div>
+      <div class="col col-6">Дата выхода фильма</div>
+      <div class="col col-6">Бронь</div>
+    </li>
+    {{#each session}}
+    <li class="table-row">
+      <div class="col col-1" data-label="Job Id">{{this.start_at}}</div>
+      <div class="col col-2" data-label="Customer Name">{{this.end_at}}</div>
+      <div class="col col-3" data-label="Amount">{{this.name}}</div>
+      <div class="col col-4" data-label="Payment Status">{{this.seats}}</div>
+            <div class="col col-5">{{this.genre}}</div>
+      <div class="col col-6">{{this.release_date}}</div>
+      <form action="/bilet/{{this.id}}" method="get">
+       <input type="submit" value="Купить билет"/>
+     </form>
+    </li>
+    {{/each}}
+  </ul>
+  </div>
+</div>
+</body>
+</html>
