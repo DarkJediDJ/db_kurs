@@ -1,22 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Добавление пользователя</title>
+    <title>Добавление кассира</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
     <div class = "check">
-    <h1>Добавление пользователя</h1>
+    <h1>Добавление кассира</h1>
      <form method="POST">
         <label>Имя</label><br>
         <input name="login" class="field"/><br><br>
         <label>Пароль</label><br>
         <input name="password" class="field" min="1" max="110" /><br><br>
         <input type="submit" value="Отправить" />
+
      </form>
-     <form action="/check" method="get">
-       <input type="submit" value="Авторизация"/>
+                  <form action="/sessions" method="get">
+       <input type="submit" value="К сессиям"/>
      </form>
     </div>
 </body>

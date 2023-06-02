@@ -8,8 +8,6 @@
     <div class="allusers">
         <table style="margin-left:auto;margin-right:auto;">
                                         <td>
-                        <form action="create_hall" method="GET">
-            <input type="submit" value="Добавить">
             </td>
             <tr><th>VIP</th><th>Количество мест</th></tr>
             {{#each hall}}
@@ -18,7 +16,6 @@
                 <td>{{this.seats}}</td>
             </tr>
             {{/each}} 
-            </form>
         </table>
      <form action="/sessions" method="get">
        <input type="submit" value="К сессиям"/>

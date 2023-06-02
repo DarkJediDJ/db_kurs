@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Занятые места</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <script>
+ function redirect(id, session){
+window.location.href = `/ticket/${id}/${session}`;
+ }
+</script>
+  <div class="allusers">
+            <h1>Это место уже занято!</h1>
+        <h style="font-size: 30px;"> Список занятых мест</h>
+
+                
+<div class="container">
+  <ul class="responsive-table">
+
+    {{#each seats}}
+    <li class="table-row">
+      <div class="col col-4" style="margin-left: 300px;">{{this.ticket_id}}</div>
+      <input id="myButton" onclick="redirect({{this.ticket_id}},{{this.session_id}})" type="submit" value="Удалить"/>
+    </li>
+    {{/each}}
+  </ul>
+  </div>
+          <p><a href="/test">Вернуться</a></p>
+</div>
+</body>
+</html>

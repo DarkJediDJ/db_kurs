@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
+
   <div class="allusers">
 <div class="container">
   <ul class="responsive-table">
@@ -16,19 +17,33 @@
       <div class="col col-4">Количество мест</div>
       <div class="col col-5">Жанр</div>
       <div class="col col-6">Дата выхода фильма</div>
-      <div class="col col-6">Бронь</div>
+      <div class="col col-7">Номер</div>
     </li>
+    <script>
+      let film = new Object
+      let a = 1
+  function aboba(){
+    let select = document.querySelector('#select');
+    a = select.selectedIndex+1;
+  }
+ function redirect(id){
+window.location.href = `/bilet/${id}/${a}`;
+ }
+</script>
     {{#each session}}
     <li class="table-row">
       <div class="col col-1" data-label="Job Id">{{this.start_at}}</div>
       <div class="col col-2" data-label="Customer Name">{{this.end_at}}</div>
       <div class="col col-3" data-label="Amount">{{this.name}}</div>
       <div class="col col-4" data-label="Payment Status">{{this.seats}}</div>
-            <div class="col col-5">{{this.genre}}</div>
+      <div class="col col-5">{{this.genre}}</div>
       <div class="col col-6">{{this.release_date}}</div>
-      <form action="/bilet/{{this.id}}" method="get">
-       <input type="submit" value="Купить билет"/>
-     </form>
+      <select onchange="aboba()" id="select" class ="select">
+      {{#each this.arr}}
+      <option>{{this}}</option>
+      {{/each}}
+      </select>
+       <input id="myButton" onclick="redirect({{this.id}})" type="submit" value="Бронь"/>
     </li>
     {{/each}}
   </ul>

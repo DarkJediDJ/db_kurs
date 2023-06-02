@@ -3,57 +3,52 @@
 <head>
     <title>Список пользователей</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
-    <div class="allusers">
-        </form>
-        <table>
-                <td>
-                    <form action="movie" method="GET" style="display:inline;">
+  <div class="allusers">
+<div class="container">
+  <ul class="responsive-table">
+    <li class="table-header">
+                            <form action="movie" method="GET" style="display:inline;">
                         <input type="submit" value="Фильмы" />
                     </form>
-                </td>
-                <td>
                     <form action="hall" method="GET" style="display:inline;">
                         <input type="submit" value="Залы">
                     </form>
-                </td>
-                <td>
                         <form action="create_session" method="GET">
-            <input type="submit" value="Добавить">
-            </td>
-        <tr><th>Начало</th><th>Конец</th><th>ID Фильма</th><th>ID Зала</th><th></th></tr>
-        {{#each session}}
-            <tr>
-                <td>{{this.start_at}}</td>
-                <td>{{this.end_at}}</td>
-                <td>{{this.movie_id}}</td>
-                <td>{{this.halls_id}}</td>
-                <td>
+            <input type="submit" value="Добавить сессию">
+            </form>
+                         <form action="/create" method="get">
+       <input type="submit" value="Добавить кассира"/>
+       
+     </form>
+    </li>
+    <li class="table-header">
+      <div class="col col-1">Начало</div>
+      <div class="col col-2">Конец</div>
+      <div class="col col-3">Фильм</div>
+      <div class="col col-4">Количество мест</div>
+      <div class="col col-5">Номер зала</div>
+      <div class="col col-6">Редактирование</div>
+    </li>
+    {{#each session}}
+    <li class="table-row">
+      <div class="col col-1">{{this.start_at}}</div>
+      <div class="col col-2" >{{this.end_at}}</div>
+      <div class="col col-3" >{{this.name}}</div>
+      <div class="col col-4">{{this.seats}}</div>
+      <div class="col col-5">{{this.halls_id}}</div>
                     <form action="delete_session/{{this.id}}" method="POST" style="display:inline;">
                         <input type="submit" value="Удалить" />
-                    </form>
-                </td>
-                <td>
-                    <form action="view_session/{{this.id}}" method="GET" style="display:inline;">
-                        <input type="submit" value="Просмотреть" />
-                    </form>                
-                </td>
-                <td>
+                    </form>               
                     <form action="edit_session/{{this.id}}" method="GET" style="display:inline;">
                         <input type="submit" value="Изменить">
-                    </form>
-                </td>
-            </tr>
-        {{/each}} <tr>
-
-        </tr> 
-    
-        </table>
-                     <form action="/check" method="get">
-       <input type="submit" value="Выйти"/>
-     </form>    
-    </div>
+                    </form>                       
+    </li>
+    {{/each}}
+  </ul>
+  </div>
+</div>
 </body>
 </html>
