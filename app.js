@@ -281,6 +281,21 @@ app.post("/create_movie", urlencodedParser, function (req, res) {
   const name = req.body.name;
   const genre = req.body.genre;
   const release_date = req.body.release_date;
+  let regex = new RegExp('^[12][0-9]{3}$')
+  let regex1 = new RegExp('^[^0-9]*$')
+  console.log(regex.test(release_date))
+  if (!regex.test(release_date) ){
+    res.redirect("/errorCreate")
+    return
+  }
+  if (!regex1.test(genre) ){
+    res.redirect("/errorCreate")
+    return
+  }
+  if (!regex1.test(name) ){
+    res.redirect("/errorCreate")
+    return
+  }
   pool.query("INSERT INTO Movie (name, genre, release_date) VALUES (?,?,?)", [name, genre, Number(release_date)], function(err, data) {
     if(err) return console.log(err);
     res.redirect("/movie");
