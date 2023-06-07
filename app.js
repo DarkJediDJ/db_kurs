@@ -372,7 +372,7 @@ app.get("/bilet/:id/:seat", function(req, res){
     doc.on('data', dataCallback);
     doc.on('end', endCallback);
     ticket.forEach(x => {
-      doc.fontSize(20).text(`Ticket`);
+      doc.fontSize(20).text(`Booking`);
       doc.fontSize(12).text(`Seat `+seat);
       doc.fontSize(12).text(`Movie `+x.name);
       doc.fontSize(12).text(`Start at `+x.start_at);
